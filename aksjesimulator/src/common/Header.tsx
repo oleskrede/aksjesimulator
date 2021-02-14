@@ -1,19 +1,22 @@
 import React from 'react';
 import Link from '../components/Link';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 function Header() {
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
   const links = [
+    {
+      label: 'Min side',
+      url: '#responsive-header',
+    },
     {
       label: 'Aksjer',
       url: '#responsive-header',
     },
     {
-      label: 'Docs',
-      url: '#responsive-header',
-    },
-    {
-      label: 'Examples',
+      label: 'Hjelp',
       url: '#responsive-header',
     },
     {
@@ -23,38 +26,33 @@ function Header() {
   ];
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-100 p-6 text-black">
+    <nav className="flex flex-wrap items-center justify-between bg-gray-100 p-6 text-gray-700">
 
-      <div className="flex items-center flex-no-shrink text-red-400 mr-6">
+      <div className="flex items-center flex-no-shrink text-indigo-900 mr-6">
         <img
           src="/logo192.png"
           width="30"
           height="30"
           className=""
           alt=""/>
-        <span className="font-semibold ml-2 text-xl tracking-tight">Aksjesimulator</span>
+        <span className="font-semibold ml-2 text-xl">Aksjesimulator</span>
       </div>
 
-      <div className="block lg:hidden">
-        <button className="flex items-center px-3 py-2 border rounded text-black border-black
-                              hover:text-red-200 hover:border-red-400">
-          <svg className="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-          </svg>
+      <div className="flex md:hidden">
+        <button className="text-xl text-indigo-900 hover:text-red-400"
+          onClick={() => setNavbarOpen(!navbarOpen)}>
+          <FontAwesomeIcon icon={faBars}/>
         </button>
       </div>
 
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
-          {links.map((link) => {
-            return <>
-              <Link url={link.url} className="block mt-4 lg:inline-block lg:mt-0 mr-4">
-                {link.label}
-              </Link>
-            </>;
-          })}
-        </div>
+      <div className={'w-full md:w-auto text-center font-semibold' + (navbarOpen ? '' : ' hidden') + ' md:flex'}>
+        {links.map((link) => {
+          return <>
+            <Link url={link.url} className="block md:inline-block mt-2 ml-4 border-b-2 border-red-200">
+              {link.label}
+            </Link>
+          </>;
+        })}
       </div>
     </nav>
   );

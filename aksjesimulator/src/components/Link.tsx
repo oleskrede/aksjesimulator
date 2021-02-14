@@ -9,7 +9,7 @@ export interface LinkProps {
 const Link = (props: LinkProps) =>
   <a
     href={props.url}
-    className={'text-black hover:text-red-400 ' + props.className}>
+    className={'text-indigo-900 hover:text-red-400 ' + props.className}>
     {props.children}
   </a>;
 
