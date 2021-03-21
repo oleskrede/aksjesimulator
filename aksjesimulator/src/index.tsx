@@ -10,9 +10,11 @@ ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <Header />
-        <Switch>
-          <Route exact path="/" component={App} />
-        </Switch>
+        <div className="mx-8 my-6">
+          <Switch>
+            <Route exact path="/" component={App} />
+          </Switch>
+        </div>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root'),

@@ -1,0 +1,27 @@
+name: Generate docs
+
+on:
+  push:
+    branches: [ master ]
+    paths: docs/mermaid/*
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Mermaids
+        uses: actions/setup-node@v2.1.5
+        run: |
+          npm install @mermaid-js/mermaid-cli
+      - name: Generate docs
+        run: |
+          mkdir -p docs/docs
+          ./node_modules/.bin/mmdc -i docs/mermaid/overview.mmd -o docs/docs/overview.png
+      - name: Commit and push changes
+        run: |
+          git config --local user.email generate-docs[bot]@noreply.aksjesimulator.no
+          git config --local user.name generate-docs[bot]
+          git add docs/docs/*
+          git commit -m "Update generated docs"
+          git push

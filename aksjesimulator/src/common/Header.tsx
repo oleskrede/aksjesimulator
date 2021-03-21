@@ -20,13 +20,13 @@ function Header() {
       url: '#responsive-header',
     },
     {
-      label: 'Blog',
+      label: 'Logg inn',
       url: '#responsive-header',
     },
   ];
 
   return (
-    <nav className="flex flex-wrap items-center justify-between bg-gray-100 p-6 text-gray-700">
+    <nav className="flex flex-wrap items-center justify-between bg-white p-6 text-gray-700 border-b border-grey-700">
 
       <div className="flex items-center flex-no-shrink text-indigo-900 mr-6">
         <img

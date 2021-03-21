@@ -1,13 +1,17 @@
 import React from 'react';
 
-class Aksjeinfo extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>NEL</p>
-      </div>
-    );
-  }
+function Aksjeinfo() {
+  const [aksjer, setAksjer] = React.useState();
+
+  React.useEffect(() => {
+
+  }, []);
+
+  return (
+    <div>
+      <p>NEL</p>
+    </div>
+  );
 }
 
 export default Aksjeinfo;
