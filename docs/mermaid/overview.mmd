@@ -1,7 +1,9 @@
 graph TD
-    A[Start] --> B{Is it?};
-    B -->|Yes| C[OK];
-    C --> D[Rethink];
-    D --> B;
-    B ---->|No| E[End];
-    F
+    
+    external_api1((External API)) -.-> data_fetcher[as-data-fetcher]
+    external_api2((External API)) -.-> data_fetcher
+  
+    data_fetcher --> kafka[/Kafka/]
+    kafka --> aksjesimulator
+    aksjesimulator --- db[(PostgreSQL)]
+    as-frontend --> aksjesimulator
