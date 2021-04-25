@@ -1,2 +1,4 @@
 # dependencies, libs, etc
 node_modules/
+
+.idea/
