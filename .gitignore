@@ -1,4 +1,10 @@
-# dependencies, libs, etc
+# javascript
 node_modules/
 
+# intellij
 .idea/
+
+# python
+.venv/
+geckodriver*
+ghostdriver*
