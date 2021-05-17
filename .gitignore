@@ -1,8 +1,12 @@
+# general
+*.log
+
 # javascript
 node_modules/
 
-# intellij
+# IDE
 .idea/
+.vscode/
 
 # python
 .venv/

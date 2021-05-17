@@ -3,7 +3,6 @@
 `pip install -r`  
 `pip freeze > requirements.txt`  
 
-apt-get install xvfb  
 apt-get install firefox  
 
 download latest https://github.com/mozilla/geckodriver/releases  
