@@ -9,6 +9,11 @@ Start Kafka med Docker:
 $ docker-compose up
 ```
 
+Bygge Docker-compose service på nytt:
+```
+$ docker-compose build --no-cache <service>
+```
+
 #### Kafka producer/consumer CLI i Docker
 Finn navn på docker container og hopp inn i denne:
 ```

@@ -3,36 +3,50 @@ from bs4 import BeautifulSoup
 from pykafka import KafkaClient
 from pykafka.topic import Topic
 from selenium import webdriver
+from selenium.webdriver.firefox.webdriver import WebDriver
 import time
 import json
 import logging
 
-from selenium.webdriver.firefox.webdriver import WebDriver
+from config import get_config
 
 logging.basicConfig(filename='scraper.log', level=logging.INFO,
                     format='%(asctime)s %(message)s')
 
-topic_name = 'quotes'
-ose_url = 'https://bors.e24.no/#!/list/norway/quotes/ose/EQUITIES/'
-# hosts = '0.0.0.0:9092'
-hosts = 'kafka:9092'
-geckodriver = './geckodriver'
+def log(message):
+    print(message)
+    logging.info(message)
 
-logging.info('Started')
+log('Loading config')
+config = get_config()
 
-logging.info(
+topic_name = config['topic_name']
+ose_url = config['ose_url']
+hosts = config['hosts']
+geckodriver = config['geckodriver']
+
+log(
     f"Setting up Kafka client with hosts: '{hosts}' and topic: '{topic_name}'.")
-client = KafkaClient(hosts=hosts)
+
+client = None
+while not type(client) is KafkaClient:
+    try:
+        client = KafkaClient(hosts=hosts)
+    except:
+        log("Could not initialize KafkaClient. Trying again in 5 seconds")
+        time.sleep(5)
+
+
 topic = client.topics[topic_name]
 
-logging.info(f"Setting up headless Firefox WebDriver.")
+log(f"Setting up headless Firefox WebDriver.")
 options = webdriver.FirefoxOptions()
 options.add_argument('-headless')
 browser = webdriver.Firefox(executable_path=geckodriver, options=options)
 
 
 def scrape_for_exchange(exchange_url: string, browser: WebDriver) -> string:
-    logging.info(f"Scraping quotes from {exchange_url}")
+    log(f"Scraping quotes from {exchange_url}")
     browser.get(exchange_url)
     time.sleep(5)
 
@@ -67,17 +81,15 @@ def scrape_for_exchange(exchange_url: string, browser: WebDriver) -> string:
 
 
 def send_to_topic(topic: Topic, json_data: string):
-    logging.info(f"Sending json_data to topic: '{topic.name}'")
+    log(f"Sending json_data to topic: '{topic.name}'")
     with topic.get_sync_producer() as producer:
         producer.produce(json_data.encode())
 
 
 while True:
-    print("Scraping data")
+    log("Scraping data")
     json_data = scrape_for_exchange(ose_url, browser)
-    print("Sending to kafka")
+    log("Sending to kafka")
     send_to_topic(topic, json_data)
-    print("Finished")
-    logging.info(
-        'Iteration complete. Waiting 15 minutes before next iteration.')
+    log('Iteration complete. Waiting 15 minutes before next iteration.')
     time.sleep(60*15)
