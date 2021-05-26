@@ -14,7 +14,8 @@ logging.basicConfig(filename='scraper.log', level=logging.INFO,
 
 topic_name = 'quotes'
 ose_url = 'https://bors.e24.no/#!/list/norway/quotes/ose/EQUITIES/'
-hosts = '127.0.0.1:9092'
+# hosts = '0.0.0.0:9092'
+hosts = 'kafka:9092'
 geckodriver = './geckodriver'
 
 logging.info('Started')
