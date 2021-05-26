@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  pythonwebscraper:
+    image: pythonwebscraper
+    build:
+      context: .
+      dockerfile: ./Dockerfile

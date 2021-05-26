@@ -1,10 +1,15 @@
+# general
+*.log
+
 # javascript
 node_modules/
 
-# intellij
+# IDE
 .idea/
+.vscode/
 
 # python
 .venv/
+__pycache__
 geckodriver*
 ghostdriver*
