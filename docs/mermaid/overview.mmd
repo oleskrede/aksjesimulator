@@ -1,9 +1,0 @@
-graph TD
-    
-    external_api1((External API)) -.-> data_fetcher[data-fetcher]
-    external_api2((External API)) -.-> data_fetcher
-  
-    data_fetcher --> kafka[/Kafka/]
-    kafka --> aksjesimulator-api
-    aksjesimulator-api --- db[(PostgreSQL)]
-    aksjesimulator --> aksjesimulator-api
