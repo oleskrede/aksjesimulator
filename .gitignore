@@ -7,9 +7,13 @@ node_modules/
 # IDE
 .idea/
 .vscode/
+*.iml
 
 # python
 .venv/
 __pycache__
 geckodriver*
 ghostdriver*
+
+# JVM
+target/

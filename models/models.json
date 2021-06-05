@@ -1,0 +1,259 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Aksjesimulator model",
+    "version": "1.0.0",
+    "description": "All prices are in 1/10000 NOK. I.e. a price of 10 000 = 1 NOK"
+  },
+  "paths": {
+    "/dummy": {
+      "get": {
+        "summary": "Because paths section is required?",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Transaction": {
+        "type": "object",
+        "required": [
+          "timestamp",
+          "ticker",
+          "amount",
+          "price",
+          "sumOfFees"
+        ],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "description": "Transaction date and time",
+            "example": "2021-01-30T08:30:00Z"
+          },
+          "ticker": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Change in number of stocks on the account"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price per stock, excluding fees"
+          },
+          "sumOfFees": {
+            "type": "integer"
+          }
+        }
+      },
+      "AccountHolding": {
+        "type": "object",
+        "required": [
+          "ticker",
+          "amount",
+          "gav"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Number of stocks"
+          },
+          "gav": {
+            "type": "integer",
+            "description": "Average price paid per stock, including fees"
+          }
+        }
+      },
+      "Ticker": {
+        "type": "object",
+        "required": [
+          "ticker",
+          "name",
+          "exchange"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "exchange": {
+            "type": "string"
+          }
+        }
+      },
+      "StockPrice": {
+        "type": "object",
+        "required": [
+          "timestamp",
+          "price",
+          "ticker"
+        ],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "ticker": {
+            "type": "string"
+          }
+        }
+      },
+      "HistoricalPrices": {
+        "type": "object",
+        "required": [
+          "ticker",
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "daily": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "price",
+                "date"
+              ],
+              "properties": {
+                "price": {
+                  "type": "integer"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "weekly": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "price",
+                "week"
+              ],
+              "properties": {
+                "price": {
+                  "type": "integer"
+                },
+                "week": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Date of wednesday in the week"
+                }
+              }
+            }
+          },
+          "monthly": {
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "type": "object",
+              "nullable": false,
+              "properties": {
+                "price": {
+                  "type": "integer",
+                  "nullable": false
+                },
+                "month": {
+                  "type": "string",
+                  "format": "date",
+                  "nullable": false,
+                  "description": "Date of the 1st of the month"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "required": [
+          "name",
+          "balance",
+          "commissionFlat",
+          "commissionPercentage",
+          "currencyFeePercentage",
+          "transactions",
+          "holdings"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "integer"
+          },
+          "commissionFlat": {
+            "type": "integer"
+          },
+          "commissionPercentage": {
+            "type": "integer"
+          },
+          "currencyFeePercentage": {
+            "type": "integer"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          },
+          "holdings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountHolding"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "account",
+          "username",
+          "password"
+        ],
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            }
+          },
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 16
+          },
+          "password": {
+            "type": "string",
+            "description": "Deprecated. Will be replaced with hash+salt or something"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
