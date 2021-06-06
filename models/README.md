@@ -15,6 +15,6 @@ rm -rf generated/kotlin/src/ && \
 openapi-generator-cli generate \
     -g kotlin \
     -i models.json \
-    -o generated/kotlin \
+    -o ../as-api/src/main/kotlin \
     --global-property models
 ```
