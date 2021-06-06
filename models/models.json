@@ -41,14 +41,17 @@
           },
           "amount": {
             "type": "integer",
+            "format": "int64",
             "description": "Change in number of stocks on the account"
           },
           "price": {
             "type": "integer",
+            "format": "int64",
             "description": "Price per stock, excluding fees"
           },
           "sumOfFees": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -65,10 +68,12 @@
           },
           "amount": {
             "type": "integer",
+            "format": "int64",
             "description": "Number of stocks"
           },
           "gav": {
             "type": "integer",
+            "format": "int64",
             "description": "Average price paid per stock, including fees"
           }
         }
@@ -105,7 +110,8 @@
             "format": "date-time"
           },
           "price": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "ticker": {
             "type": "string"
@@ -134,7 +140,8 @@
               ],
               "properties": {
                 "price": {
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "date": {
                   "type": "string",
@@ -153,7 +160,8 @@
               ],
               "properties": {
                 "price": {
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "week": {
                   "type": "string",
@@ -172,6 +180,7 @@
               "properties": {
                 "price": {
                   "type": "integer",
+                  "format": "int64",
                   "nullable": false
                 },
                 "month": {
@@ -201,7 +210,8 @@
             "type": "string"
           },
           "balance": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "commissionFlat": {
             "type": "integer"
@@ -229,11 +239,15 @@
       "User": {
         "type": "object",
         "required": [
+          "id",
           "account",
           "username",
           "password"
         ],
         "properties": {
+          "id":{
+            "type": "integer"
+          },
           "accounts": {
             "type": "array",
             "items": {
