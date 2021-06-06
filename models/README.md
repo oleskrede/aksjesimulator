@@ -11,10 +11,10 @@ Install the [OpenAPI Generator CLI](https://openapi-generator.tech/docs/installa
 ### Generate models
 
 ```
-rm -rf generated/kotlin/src/ && \
+rm /rf ../as-api/src/main/kotlin/org/openapitools && \
 openapi-generator-cli generate \
     -g kotlin \
     -i models.json \
-    -o ../as-api/src/main/kotlin \
+    -o ../as-api \
     --global-property models
 ```
