@@ -1,4 +1,4 @@
-package com.jetbrains.handson.httpapi
+package no.aksjesimulator
 
 import io.ktor.application.Application
 

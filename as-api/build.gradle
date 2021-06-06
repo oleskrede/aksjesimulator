@@ -21,6 +21,8 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-serialization:$ktor_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
@@ -33,5 +35,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'com.jetbrains.handson.httpapi.ApplicationKt'
+    mainClassName = 'no.aksjesimulator.ApplicationKt'
 }
