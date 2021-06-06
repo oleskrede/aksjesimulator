@@ -20,6 +20,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:1.4.0")
     implementation("io.ktor:ktor-html-builder:1.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+
 }
 
 tasks.test {
