@@ -31,7 +31,7 @@ data class Account (
     @Json(name = "name")
     val name: kotlin.String,
     @Json(name = "balance")
-    val balance: kotlin.Int,
+    val balance: kotlin.Long,
     @Json(name = "commissionFlat")
     val commissionFlat: kotlin.Int,
     @Json(name = "commissionPercentage")

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **kotlin.String** |  | 
-**balance** | **kotlin.Int** |  | 
+**balance** | **kotlin.Long** |  | 
 **commissionFlat** | **kotlin.Int** |  | 
 **commissionPercentage** | **kotlin.Int** |  | 
 **currencyFeePercentage** | **kotlin.Int** |  | 

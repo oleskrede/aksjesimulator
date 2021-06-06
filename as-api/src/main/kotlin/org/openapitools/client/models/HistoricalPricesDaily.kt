@@ -22,7 +22,7 @@ import com.squareup.moshi.Json
 
 data class HistoricalPricesDaily (
     @Json(name = "price")
-    val price: kotlin.Int,
+    val price: kotlin.Long,
     @Json(name = "date")
     val date: java.time.LocalDate
 )

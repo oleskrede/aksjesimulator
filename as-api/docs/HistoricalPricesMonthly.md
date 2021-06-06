@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**price** | **kotlin.Int** |  |  [optional]
+**price** | **kotlin.Long** |  |  [optional]
 **month** | [**java.time.LocalDate**](java.time.LocalDate.md) | Date of the 1st of the month |  [optional]
 
 

@@ -25,7 +25,7 @@ data class StockPrice (
     @Json(name = "timestamp")
     val timestamp: java.time.OffsetDateTime,
     @Json(name = "price")
-    val price: kotlin.Int,
+    val price: kotlin.Long,
     @Json(name = "ticker")
     val ticker: kotlin.String
 )

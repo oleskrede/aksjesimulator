@@ -22,7 +22,7 @@ import com.squareup.moshi.Json
 
 data class HistoricalPricesMonthly (
     @Json(name = "price")
-    val price: kotlin.Int? = null,
+    val price: kotlin.Long? = null,
     /* Date of the 1st of the month */
     @Json(name = "month")
     val month: java.time.LocalDate? = null

@@ -31,11 +31,11 @@ data class Transaction (
     val ticker: kotlin.String,
     /* Change in number of stocks on the account */
     @Json(name = "amount")
-    val amount: kotlin.Int,
+    val amount: kotlin.Long,
     /* Price per stock, excluding fees */
     @Json(name = "price")
-    val price: kotlin.Int,
+    val price: kotlin.Long,
     @Json(name = "sumOfFees")
-    val sumOfFees: kotlin.Int
+    val sumOfFees: kotlin.Long
 )
 

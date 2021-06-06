@@ -26,9 +26,9 @@ data class AccountHolding (
     val ticker: kotlin.String,
     /* Number of stocks */
     @Json(name = "amount")
-    val amount: kotlin.Int,
+    val amount: kotlin.Long,
     /* Average price paid per stock, including fees */
     @Json(name = "gav")
-    val gav: kotlin.Int
+    val gav: kotlin.Long
 )
 
