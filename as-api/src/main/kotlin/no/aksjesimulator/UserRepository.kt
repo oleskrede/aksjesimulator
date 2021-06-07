@@ -8,12 +8,12 @@ class UserRepository {
     private val users = mutableListOf<User>()
 
     private var idGenerator = 1
-    private fun generateId() =  idGenerator++
+    private fun generateId() = idGenerator++
 
     init {
         val holding = AccountHolding("TEL", 10, 1000)
         val account = Account("ASK", 1000000, 0, 0, 0, emptyList(), listOf(holding))
-        val user = User(1, "ole", "password", listOf(account))
+        val user = User(generateId(), "ole", "password", listOf(account))
         users.add(user)
     }
 
@@ -31,6 +31,6 @@ class UserRepository {
     }
 
     fun deleteUser(id: Int): Boolean {
-        return users.removeIf {it.id == id}
+        return users.removeIf { it.id == id }
     }
 }
