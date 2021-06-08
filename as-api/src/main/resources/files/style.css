@@ -1,0 +1,45 @@
+/* Background color */
+
+.bg-green-100 {
+  --tw-bg-opacity : 1;
+  background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
+}
+
+.bg-blue-50 {
+  --tw-bg-opacity : 1;
+  background-color: rgba(239, 246, 255, var(--tw-bg-opacity));
+}
+
+.bg-blue-200 {
+  --tw-bg-opacity : 1;
+  background-color: rgba(219, 234, 254, var(--tw-bg-opacity));
+}
+
+/* Float */
+.float-right {
+  float: right;
+}
+
+/* Margin */
+.m-4 {
+  margin: 1rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+/* Padding */
+.px-4 {
+  padding-left : 1rem;
+  padding-right: 1rem;
+}
+
+/* Flex */
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}

@@ -1,4 +1,4 @@
-package no.aksjesimulator
+package no.aksjesimulator.route
 
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -12,6 +12,7 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
+import no.aksjesimulator.repository.UserRepository
 
 fun Route.userRouting(userRepository: UserRepository = UserRepository()) {
     route("/user") {

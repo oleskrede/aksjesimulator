@@ -1,4 +1,4 @@
-package no.aksjesimulator
+package no.aksjesimulator.repository
 
 import org.openapitools.client.models.StockPrice
 import java.time.OffsetDateTime

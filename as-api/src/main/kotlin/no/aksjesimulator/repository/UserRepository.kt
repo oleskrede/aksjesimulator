@@ -1,5 +1,6 @@
-package no.aksjesimulator
+package no.aksjesimulator.repository
 
+import no.aksjesimulator.route.NewUserDto
 import org.openapitools.client.models.Account
 import org.openapitools.client.models.AccountHolding
 import org.openapitools.client.models.User

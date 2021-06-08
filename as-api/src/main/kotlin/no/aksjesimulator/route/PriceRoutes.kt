@@ -8,6 +8,7 @@ import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.routing
+import no.aksjesimulator.repository.PriceRepository
 
 fun Route.priceRouting(priceRepository: PriceRepository) {
     get("/price") {
