@@ -193,4 +193,3 @@ components:
           description: Deprecated. Will be replaced with hash+salt or something
         email:
           type: string
-
