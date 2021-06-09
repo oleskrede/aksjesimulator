@@ -9,7 +9,7 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package org.openapitools.client.models
+package no.aksjesimulator.domain.models
 
 
 import com.squareup.moshi.Json
@@ -17,13 +17,14 @@ import com.squareup.moshi.Json
 /**
  * 
  * @param price 
- * @param date 
+ * @param month Date of the 1st of the month
  */
 
-data class HistoricalPricesDaily (
+data class HistoricalPricesMonthly (
     @Json(name = "price")
-    val price: kotlin.Long,
-    @Json(name = "date")
-    val date: java.time.LocalDate
+    val price: kotlin.Long? = null,
+    /* Date of the 1st of the month */
+    @Json(name = "month")
+    val month: java.time.LocalDate? = null
 )
 

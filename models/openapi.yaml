@@ -187,10 +187,9 @@ components:
         username:
           type: string
           minLength: 3
-          maxLength: 16
+          maxLength: 14
         password:
           type: string
           description: Deprecated. Will be replaced with hash+salt or something
         email:
           type: string
-

@@ -9,11 +9,11 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package org.openapitools.client.models
+package no.aksjesimulator.domain.models
 
-import org.openapitools.client.models.HistoricalPricesDaily
-import org.openapitools.client.models.HistoricalPricesMonthly
-import org.openapitools.client.models.HistoricalPricesWeekly
+import no.aksjesimulator.domain.models.HistoricalPricesDaily
+import no.aksjesimulator.domain.models.HistoricalPricesMonthly
+import no.aksjesimulator.domain.models.HistoricalPricesWeekly
 
 import com.squareup.moshi.Json
 

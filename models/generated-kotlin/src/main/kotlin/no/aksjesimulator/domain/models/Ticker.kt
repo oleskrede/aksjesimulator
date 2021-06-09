@@ -9,7 +9,7 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package org.openapitools.client.models
+package no.aksjesimulator.domain.models
 
 
 import com.squareup.moshi.Json
@@ -17,18 +17,16 @@ import com.squareup.moshi.Json
 /**
  * 
  * @param ticker 
- * @param amount Number of stocks
- * @param gav Average price paid per stock, including fees
+ * @param name 
+ * @param exchange 
  */
 
-data class AccountHolding (
+data class Ticker (
     @Json(name = "ticker")
     val ticker: kotlin.String,
-    /* Number of stocks */
-    @Json(name = "amount")
-    val amount: kotlin.Long,
-    /* Average price paid per stock, including fees */
-    @Json(name = "gav")
-    val gav: kotlin.Long
+    @Json(name = "name")
+    val name: kotlin.String,
+    @Json(name = "exchange")
+    val exchange: kotlin.String
 )
 

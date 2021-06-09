@@ -9,9 +9,9 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package org.openapitools.client.models
+package no.aksjesimulator.domain.models
 
-import org.openapitools.client.models.Account
+import no.aksjesimulator.domain.models.Account
 
 import com.squareup.moshi.Json
 

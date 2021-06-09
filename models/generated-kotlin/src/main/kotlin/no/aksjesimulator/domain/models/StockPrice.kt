@@ -9,22 +9,24 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package org.openapitools.client.models
+package no.aksjesimulator.domain.models
 
 
 import com.squareup.moshi.Json
 
 /**
  * 
+ * @param timestamp 
  * @param price 
- * @param week Date of wednesday in the week
+ * @param ticker 
  */
 
-data class HistoricalPricesWeekly (
+data class StockPrice (
+    @Json(name = "timestamp")
+    val timestamp: java.time.OffsetDateTime,
     @Json(name = "price")
     val price: kotlin.Long,
-    /* Date of wednesday in the week */
-    @Json(name = "week")
-    val week: java.time.LocalDate
+    @Json(name = "ticker")
+    val ticker: kotlin.String
 )
 
