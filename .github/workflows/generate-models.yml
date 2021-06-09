@@ -18,7 +18,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
       - name: Install openapi-generator
-        run: npm install @openapitools/openapi-generator-cli -g
+        run: |
+          cd models
+          npm install @openapitools/openapi-generator-cli
       - name: Generate docs
         run: |
           cd models
