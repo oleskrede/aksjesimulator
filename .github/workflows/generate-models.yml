@@ -24,7 +24,8 @@ jobs:
           npx @openapitools/openapi-generator-cli generate \
             -g kotlin \
             -i openapi.yaml \
-            -o generated-kotlin
+            -o generated-kotlin \
+            --global-property models
       - name: Commit and push generated models
         run: |
           git config --global user.name generate-models-bot
