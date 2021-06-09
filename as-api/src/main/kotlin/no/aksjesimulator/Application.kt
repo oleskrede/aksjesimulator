@@ -9,7 +9,7 @@ import io.ktor.http.content.resources
 import io.ktor.http.content.static
 import io.ktor.mustache.Mustache
 import io.ktor.routing.routing
-import no.aksjesimulator.mustache.registerMustacheHomeRoutes
+import no.aksjesimulator.interfaces.mustache.registerMustacheHomeRoutes
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 

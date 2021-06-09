@@ -1,0 +1,43 @@
+name: Generate and publish Aksjesimulator Kotlin models to GitHub Packages
+
+on:
+  push:
+    branches: 
+      - main
+    paths: 
+      - models/openapi.yaml
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+      - name: Install openapi-generator
+        run: npm install @openapitools/openapi-generator-cli -g
+      - name: Generate docs
+        run: |
+          cd models
+          openapi-generator-cli generate \
+            -g kotlin \
+            -i openapi.yaml \
+            -o generated-kotlin \
+            --global-property models
+      - name: Commit and push generated models
+        run: |
+          git config --local user.email generate-models[bot]@aksjesimulator.no
+          git config --local user.name generate-models[bot]
+          git add models/generated-kotlin/*
+          git commit -m "Generated models updated according to latest spec"
+          git push
+      - name: Build and publish Gradle package
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd models/generated-kotlin
+          ./gradlew build
+          ./gradlew publish
