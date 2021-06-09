@@ -4,12 +4,4 @@ Specified with OpenAPI
 
 ## Usage
 
-### Install 
-
-Install the [OpenAPI Generator CLI](https://openapi-generator.tech/docs/installation/#bash-launcher-script)
-
-### Generate models
-
-```
-./generate-models.sh
-```
+Modify `openapi.yaml`, commit, push and let `.github/workflows/generate-models.yml` take care of the generating and publishing the models.
