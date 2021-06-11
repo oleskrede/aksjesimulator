@@ -16,7 +16,7 @@ repositories {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/oleskrede/aksjesimulator")
         credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_REPOSITORY")
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
             password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
         }
     }
@@ -25,7 +25,6 @@ repositories {
 
 Create PAT in Github and set environment variables
 ```
-GITHUB_REPOSITORY=<Github username>
+GITHUB_USER=<Github username>
 GITHUB_TOKEN=<PAT>
 ```
-(Yes, GITHUB_REPOSITORY should be GITHUB_USER. Need to check how it works in Github Actions.)

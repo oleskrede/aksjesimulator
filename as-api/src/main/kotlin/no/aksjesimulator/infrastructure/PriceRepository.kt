@@ -1,6 +1,6 @@
-package no.aksjesimulator.interfaces.repository
+package no.aksjesimulator.infrastructure
 
-import org.openapitools.client.models.StockPrice
+import no.aksjesimulator.domain.models.StockPrice
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 

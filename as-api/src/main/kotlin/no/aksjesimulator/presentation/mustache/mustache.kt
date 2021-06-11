@@ -1,4 +1,4 @@
-package no.aksjesimulator.interfaces.mustache
+package no.aksjesimulator.presentation.mustache
 
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -9,24 +9,24 @@ import io.ktor.routing.get
 import io.ktor.routing.route
 import io.ktor.routing.routing
 
-val emptyMap = emptyMap<String, Any>()
+private val emptyMap = emptyMap<String, Any>()
 
-fun Route.mustacheHomeRouting() {
-    route("/") {
+fun Route.mustacheRouting() {
+    route("/simple") {
         get {
-            call.respond(MustacheContent("index.hbs", emptyMap))
+            call.respond(MustacheContent("login.hbs", emptyMap))
+        }
+    }
+
+    route("/simple/login") {
+        get {
+            call.respond(MustacheContent("login.hbs", emptyMap))
         }
     }
 }
 
 fun Application.registerMustacheHomeRoutes() {
     routing {
-        mustacheHomeRouting()
+        mustacheRouting()
     }
 }
-
-data class NewUserDto(
-    val username: String,
-    val password: String,
-    val email: String? = null
-)
