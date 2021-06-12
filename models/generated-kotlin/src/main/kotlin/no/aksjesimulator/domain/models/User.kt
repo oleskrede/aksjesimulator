@@ -18,22 +18,22 @@ import com.squareup.moshi.Json
 /**
  * 
  * @param id 
+ * @param accounts 
  * @param username 
  * @param password Deprecated. Will be replaced with hash+salt or something
- * @param accounts 
  * @param email 
  */
 
 data class User (
     @Json(name = "id")
     val id: kotlin.Int,
+    @Json(name = "accounts")
+    val accounts: kotlin.collections.List<Account>,
     @Json(name = "username")
     val username: kotlin.String,
     /* Deprecated. Will be replaced with hash+salt or something */
     @Json(name = "password")
     val password: kotlin.String,
-    @Json(name = "accounts")
-    val accounts: kotlin.collections.List<Account>? = null,
     @Json(name = "email")
     val email: kotlin.String? = null
 )
