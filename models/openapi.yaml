@@ -143,6 +143,7 @@ components:
     Account:
       type: object
       required:
+        - id
         - name
         - balance
         - commissionFlat
@@ -151,6 +152,8 @@ components:
         - transactions
         - holdings
       properties:
+        id:
+          type: integer
         name:
           type: string
         balance:
@@ -193,3 +196,11 @@ components:
           description: Deprecated. Will be replaced with hash+salt or something
         email:
           type: string
+
+    AccountVM:
+      allOf:
+        - $ref: '#/components/schemas/Account'
+        - type: object
+          properties:
+            nokBalance:
+              type: integer
