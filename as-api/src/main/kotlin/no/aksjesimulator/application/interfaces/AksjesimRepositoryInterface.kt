@@ -1,10 +1,11 @@
 package no.aksjesimulator.application.interfaces
 
-import no.aksjesimulator.domain.models.User
 import no.aksjesimulator.application.UserDto
+import no.aksjesimulator.domain.models.User
 
-interface UserRepositoryInterface {
-    fun getUser(id: Int): User?
+interface AksjesimRepositoryInterface {
+    fun getUserById(id: Int): User?
+    fun getUserByUsername(username: String): User?
     fun createUser(userDto: UserDto): User
     fun deleteUser(userId: Int): Boolean
 }

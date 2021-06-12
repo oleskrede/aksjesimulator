@@ -9,11 +9,11 @@ import io.ktor.http.content.resources
 import io.ktor.http.content.static
 import io.ktor.mustache.Mustache
 import io.ktor.routing.routing
-import no.aksjesimulator.presentation.mustache.registerMustacheHomeRoutes
+import no.aksjesimulator.presentation.mustache.registerMustacheRoutes
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-fun Application.module(testing: Boolean = false) {
+fun Application.module(dependencyInjection: DependencyInjection = DependencyInjection()) {
     install(ContentNegotiation) {
         gson()
     }
@@ -29,5 +29,5 @@ fun Application.module(testing: Boolean = false) {
             resources("files")
         }
     }
-    registerMustacheHomeRoutes()
+    registerMustacheRoutes(dependencyInjection.login)
 }

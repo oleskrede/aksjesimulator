@@ -1,0 +1,10 @@
+{{> header}}
+
+<div class="mainContent">
+  <p>Dine kontoer:</p>
+  {{#user.accounts}}
+  <a href="">{{account.name}}: {{account.balance}} NOK</a>
+  {{/user.accounts}}
+</div>
+
+{{> footer}}

@@ -2,9 +2,9 @@ package no.aksjesimulator.presentation.api
 
 import io.ktor.application.Application
 import io.ktor.routing.Route
-import no.aksjesimulator.infrastructure.repository.stubs.UserRepositoryStub
+import no.aksjesimulator.infrastructure.repository.stubs.AksjesimRepositoryStub
 
-fun Route.userRouting(userRepository: UserRepositoryStub = UserRepositoryStub()) {
+fun Route.userRouting(userRepository: AksjesimRepositoryStub = AksjesimRepositoryStub()) {
 //    route("/user") {
 //        get {
 //            val allUsers = userRepository.getAllUsers()
@@ -42,7 +42,7 @@ fun Route.userRouting(userRepository: UserRepositoryStub = UserRepositoryStub())
 //    }
 }
 
-fun Application.registerUserRoutes(userRepository: UserRepositoryStub) {
+fun Application.registerUserRoutes(userRepository: AksjesimRepositoryStub) {
 //    routing {
 //        userRouting(userRepository)
 //    }
