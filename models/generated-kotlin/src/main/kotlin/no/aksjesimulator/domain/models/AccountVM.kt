@@ -11,7 +11,9 @@
 */
 package no.aksjesimulator.domain.models
 
+import no.aksjesimulator.domain.models.Account
 import no.aksjesimulator.domain.models.AccountHolding
+import no.aksjesimulator.domain.models.AccountVMAllOf
 import no.aksjesimulator.domain.models.Transaction
 
 import com.squareup.moshi.Json
@@ -26,9 +28,10 @@ import com.squareup.moshi.Json
  * @param currencyFeePercentage 
  * @param transactions 
  * @param holdings 
+ * @param nokBalance 
  */
 
-data class Account (
+data class AccountVM (
     @Json(name = "id")
     val id: kotlin.Int,
     @Json(name = "name")
@@ -44,6 +47,8 @@ data class Account (
     @Json(name = "transactions")
     val transactions: kotlin.collections.List<Transaction>,
     @Json(name = "holdings")
-    val holdings: kotlin.collections.List<AccountHolding>
+    val holdings: kotlin.collections.List<AccountHolding>,
+    @Json(name = "nokBalance")
+    val nokBalance: kotlin.Int? = null
 )
 
