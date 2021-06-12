@@ -179,7 +179,7 @@ components:
       type: object
       required:
         - id
-        - account
+        - accounts
         - username
         - password
       properties:
