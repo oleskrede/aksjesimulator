@@ -2,7 +2,6 @@ openapi: 3.0.3
 info:
   title: Aksjesimulator model
   version: 1.0.0
-  description: All prices are in 1/10000 NOK. I.e. a price of 10 000 = 1 NOK
 paths:
   /dummy:
     get:
@@ -34,12 +33,12 @@ components:
           format: int64
           description: Change in number of stocks on the account
         price:
-          type: integer
-          format: int64
+          type: number
+          format: double
           description: 'Price per stock, excluding fees'
         sumOfFees:
-          type: integer
-          format: int64
+          type: number
+          format: double
     AccountHolding:
       type: object
       required:
@@ -54,8 +53,8 @@ components:
           format: int64
           description: Number of stocks
         gav:
-          type: integer
-          format: int64
+          type: number
+          format: double
           description: 'Average price paid per stock, including fees'
     Ticker:
       type: object
@@ -81,8 +80,8 @@ components:
           type: string
           format: date-time
         price:
-          type: integer
-          format: int64
+          type: number
+          format: double
         ticker:
           type: string
     HistoricalPrices:
@@ -104,8 +103,8 @@ components:
               - date
             properties:
               price:
-                type: integer
-                format: int64
+                type: number
+                format: double
               date:
                 type: string
                 format: date
@@ -118,8 +117,8 @@ components:
               - week
             properties:
               price:
-                type: integer
-                format: int64
+                type: number
+                format: double
               week:
                 type: string
                 format: date
@@ -132,8 +131,8 @@ components:
             nullable: false
             properties:
               price:
-                type: integer
-                format: int64
+                type: number
+                format: double
                 nullable: false
               month:
                 type: string
@@ -157,14 +156,17 @@ components:
         name:
           type: string
         balance:
-          type: integer
-          format: int64
+          type: number
+          format: double
         commissionFlat:
-          type: integer
+          type: number
+          format: float
         commissionPercentage:
-          type: integer
+          type: number
+          format: float
         currencyFeePercentage:
-          type: integer
+          type: number
+          format: float
         transactions:
           type: array
           items:
@@ -196,11 +198,3 @@ components:
           description: Deprecated. Will be replaced with hash+salt or something
         email:
           type: string
-
-    AccountVM:
-      allOf:
-        - $ref: '#/components/schemas/Account'
-        - type: object
-          properties:
-            nokBalance:
-              type: integer
