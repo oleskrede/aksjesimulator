@@ -21,11 +21,11 @@ import com.squareup.moshi.Json
  * @param id 
  * @param name 
  * @param balance 
- * @param commissionPercentage 
  * @param transactions 
  * @param holdings 
- * @param commissionMinimum 
- * @param currencySpread 
+ * @param commissionFeeMinimum Minimum treshold for commissionFee. In NOK.
+ * @param commissionFee Percentage of each trade
+ * @param currencySpread Percentage of each trade
  */
 
 data class Account (
@@ -35,14 +35,17 @@ data class Account (
     val name: kotlin.String,
     @Json(name = "balance")
     val balance: kotlin.Double,
-    @Json(name = "commissionPercentage")
-    val commissionPercentage: kotlin.Float,
     @Json(name = "transactions")
     val transactions: kotlin.collections.List<Transaction>,
     @Json(name = "holdings")
     val holdings: kotlin.collections.List<AccountHolding>,
-    @Json(name = "commissionMinimum")
-    val commissionMinimum: kotlin.Float? = null,
+    /* Minimum treshold for commissionFee. In NOK. */
+    @Json(name = "commissionFeeMinimum")
+    val commissionFeeMinimum: kotlin.Float? = null,
+    /* Percentage of each trade */
+    @Json(name = "commissionFee")
+    val commissionFee: kotlin.Float? = null,
+    /* Percentage of each trade */
     @Json(name = "currencySpread")
     val currencySpread: kotlin.Float? = null
 )
