@@ -6,8 +6,6 @@ import no.aksjesimulator.domain.models.User
 
 class Aksjesimulator(val aksjesimRepository: AksjesimRepositoryInterface) {
 
-    fun getUser(id: Int): User? = aksjesimRepository.getUserById(id)
-
     fun getUserByUsername(username: String): User? = aksjesimRepository.getUserByUsername(username)
 
     fun createUser(userDto: UserDto): User = aksjesimRepository.createUser(userDto)

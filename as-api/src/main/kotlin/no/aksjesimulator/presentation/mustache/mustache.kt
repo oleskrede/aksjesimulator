@@ -10,6 +10,8 @@ import io.ktor.auth.form
 import io.ktor.auth.principal
 import io.ktor.auth.session
 import io.ktor.mustache.MustacheContent
+import io.ktor.request.receive
+import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
 import io.ktor.routing.Route
@@ -81,6 +83,13 @@ fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
                 val user = aksjesimulator.getUserByUsername(principal.username)?.toUserVM()
                 val params = mapOf("username" to principal.username, "user" to user)
                 call.respond(MustacheContent("accounts.hbs", params))
+            }
+
+            post {
+                val principal = call.principal<UserSession>()!!
+                val accountParams = call.receiveParameters()
+                aksjesimulator.createAccount(principal.username)
+                call.respondRedirect("/simple/accounts")
             }
         }
     }

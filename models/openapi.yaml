@@ -158,15 +158,18 @@ components:
         balance:
           type: number
           format: double
-        commissionMinimum:
+        commissionFeeMinimum:
           type: number
           format: float
-        commissionPercentage:
+          description: Minimum treshold for commissionFee. In NOK.
+        commissionFee:
           type: number
           format: float
+          description: Percentage of each trade
         currencySpread:
           type: number
           format: float
+          description: Percentage of each trade
         transactions:
           type: array
           items:

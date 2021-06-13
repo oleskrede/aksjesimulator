@@ -8,4 +8,13 @@ interface AksjesimRepositoryInterface {
     fun getUserByUsername(username: String): User?
     fun createUser(userDto: UserDto): User
     fun deleteUser(userId: Int): Boolean
+
+    fun createAccount(
+        userId: Int,
+        name: String,
+        initialBalance: Double,
+        brokerageFee: Float,
+        brokerageSpread: Float,
+        currencySpread: Float
+    )
 }
