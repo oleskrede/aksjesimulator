@@ -158,13 +158,13 @@ components:
         balance:
           type: number
           format: double
-        commissionFlat:
+        commissionMinimum:
           type: number
           format: float
         commissionPercentage:
           type: number
           format: float
-        currencyFeePercentage:
+        currencySpread:
           type: number
           format: float
         transactions:

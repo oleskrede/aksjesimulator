@@ -16,9 +16,18 @@ class AksjesimRepositoryStub : AksjesimRepositoryInterface {
     private fun generateAccountId() = userIdGenerator++
 
     init {
-        val holding = AccountHolding("TEL", 10, 1000)
-        val account = Account(generateAccountId(), "ASK", 1000000, 0, 0, 0, emptyList(), listOf(holding))
-        val user = User(generateUserId(), "ole", "123", listOf(account))
+        val holding = AccountHolding("TEL", 10, 143.0)
+        val account = Account(
+            generateAccountId(),
+            "ASK",
+            100000.0,
+            0F,
+            0F,
+            0F,
+            emptyList(),
+            listOf(holding)
+        )
+        val user = User(generateUserId(), listOf(account), "ole", "123")
         users.add(user)
     }
 
@@ -35,7 +44,7 @@ class AksjesimRepositoryStub : AksjesimRepositoryInterface {
     }
 
     override fun createUser(userDto: UserDto): User {
-        val user = User(generateUserId(), userDto.username, userDto.password, userDto.accounts, userDto.email)
+        val user = User(generateUserId(), userDto.accounts, userDto.username, userDto.password, userDto.email)
         users.add(user)
         return user
     }

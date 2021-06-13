@@ -10,10 +10,10 @@ class PriceRepository {
 
     init {
         val now = OffsetDateTime.of(2021, 6, 7, 15, 30, 0, 0, ZoneOffset.UTC)
-        val tel = StockPrice(now, 1435500, "TEL")
-        val nhy = StockPrice(now, 539400, "NHY")
-        val dnb = StockPrice(now, 1886000, "DNB")
-        val sbank = StockPrice(now, 1078000, "SBANK")
+        val tel = StockPrice(now, 143.5500, "TEL")
+        val nhy = StockPrice(now, 53.9400, "NHY")
+        val dnb = StockPrice(now, 188.6000, "DNB")
+        val sbank = StockPrice(now, 107.8000, "SBANK")
         prices[tel.ticker] = tel
         prices[nhy.ticker] = nhy
         prices[dnb.ticker] = dnb

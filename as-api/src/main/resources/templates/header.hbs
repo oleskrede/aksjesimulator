@@ -9,7 +9,7 @@
 <body>
 
   <div style="padding: 0 1rem 1rem 1rem;">
-    <a href="/simple"><h1>Aksjesimulator</h1></a>
+    <h1>Aksjesimulator</h1>
 
     <div style="display: flex; justify-content: space-between">
       <div>
@@ -19,7 +19,8 @@
         {{/username}}
       </div>
       <div>
-        {{#username}}
+        <a class="headerLink" href="/simple/faq">FAQ</a>
+        {{#username}}        
         <a class="headerLink" href="/simple/profile">Profil</a>
         <a class="headerLink" href="/simple/logout">Logg ut</a>
         {{/username}}

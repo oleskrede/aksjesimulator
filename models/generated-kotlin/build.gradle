@@ -1,5 +1,5 @@
 group 'no.aksjesimulator'
-version '0.1'
+version '0.2'
 
 wrapper {
     gradleVersion = '6.8.3'

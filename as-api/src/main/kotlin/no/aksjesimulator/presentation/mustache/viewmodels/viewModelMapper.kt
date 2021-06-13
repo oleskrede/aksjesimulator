@@ -5,17 +5,17 @@ import no.aksjesimulator.domain.models.User
 
 data class AccountVM(val id: Int, val name: String, val balance: Int)
 
-data class UserVM(val username: String, val accounts: List<AccountVM>)
+data class UserVM(val username: String, val accounts: Array<AccountVM>)
 
-fun accountTOAccountVm(account: Account): AccountVM {
+fun Account.toAccountVm(): AccountVM {
     return AccountVM(
-        account.id,
-        account.name,
-        (account.balance).toInt()
+        id,
+        name,
+        balance.toInt()
     )
 }
 
-fun userToUserVM(user: User): UserVM {
-    val accountVMs = user.accounts?.map { accountTOAccountVm(it) } ?: emptyList()
-    return UserVM(user.username, accountVMs)
+fun User.toUserVM(): UserVM {
+    val accountVMs = accounts?.map { it.toAccountVm() }.toTypedArray()
+    return UserVM(username, accountVMs)
 }

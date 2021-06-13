@@ -1,10 +1,59 @@
 {{> header}}
 
 <div class="mainContent">
-  <p>Dine kontoer:</p>
-  {{#user.accounts}}
-  <a href="">{{account.name}}: {{account.balance}} NOK</a>
-  {{/user.accounts}}
+
+  <h2>Kontoer</h1>
+
+  <div>
+    <p>Dine kontoer:</p>
+    <ul>
+      {{#user.accounts}}
+      <li>
+        <a href="/simple/accounts/{{id}}">{{id}} - {{name}} - {{balance}} NOK</a>
+      </li>
+      {{/user.accounts}}
+    </ul>
+  </div>
+
+  <div style="margin-top: 4rem;">
+    <p>Legg til ny konto:</p>
+    <div style="padding: 1rem; width: 15rem; border: 1px solid;">
+
+
+      <form action="/simple/accounts" method="post">
+        <div class="centered">
+          <label for="name">Navn</label><br />
+          <input style="width: 12rem;" type="text" name="name" id="name" required>
+        </div>
+
+        <div class="centered mt-1">
+          <label for="balance">Saldo</label><br />
+          <input style="width: 12rem;" type="number" name="balance" id="balance">
+        </div>
+
+        <div class="centered mt-1">
+          <label for="comissionMinimum">Minstekurtasje</label><br />
+          <input style="width: 8rem;" type="number" name="comissionMinimum" id="comissionMinimum">
+        </div>
+
+        <div class="centered mt-1">
+          <label for="comissionPercentage">Kurtasje (%)</label><br />
+          <input style="width: 8rem;" type="number" name="comissionPercentage" id="comissionPercentage">%
+        </div>
+
+        <div class="centered mt-1">
+          <label for="currencySpread">Valutaspread (%)</label><br />
+          <input style="width: 8rem;" type="number" name="currencySpread" id="currencySpread">%
+        </div>
+
+        <div class="mt-2">
+          <input style="width: 12rem;" type="submit" value="Opprett konto">
+        </div>
+      </form>
+
+    </div>
+  </div>
+
 </div>
 
 {{> footer}}

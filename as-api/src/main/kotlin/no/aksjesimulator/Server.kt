@@ -13,7 +13,7 @@ import no.aksjesimulator.presentation.mustache.registerMustacheRoutes
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-fun Application.module(dependencyInjection: DependencyInjection = DependencyInjection()) {
+fun Application.module(depInj: DependencyInjection = DependencyInjection()) {
     install(ContentNegotiation) {
         gson()
     }
@@ -29,5 +29,5 @@ fun Application.module(dependencyInjection: DependencyInjection = DependencyInje
             resources("files")
         }
     }
-    registerMustacheRoutes(dependencyInjection.login)
+    registerMustacheRoutes(depInj.login, depInj.aksjesimulator)
 }
