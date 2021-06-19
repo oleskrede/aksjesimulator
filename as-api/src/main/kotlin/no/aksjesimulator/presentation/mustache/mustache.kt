@@ -10,7 +10,6 @@ import io.ktor.auth.form
 import io.ktor.auth.principal
 import io.ktor.auth.session
 import io.ktor.mustache.MustacheContent
-import io.ktor.request.receive
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
@@ -26,6 +25,8 @@ import io.ktor.sessions.sessions
 import io.ktor.sessions.set
 import no.aksjesimulator.application.Aksjesimulator
 import no.aksjesimulator.application.AuthInterface
+import no.aksjesimulator.application.models.dto.NewAccountDto
+import no.aksjesimulator.presentation.mustache.viewmodels.toAccountVM
 import no.aksjesimulator.presentation.mustache.viewmodels.toUserVM
 
 private val emptyMap = emptyMap<String, Any>()
@@ -33,7 +34,7 @@ private const val AUTH_FORM = "auth-form"
 private const val AUTH_SESSION = "auth-session"
 private const val USER_SESSION = "user_session"
 
-data class UserSession(val username: String, val token: String) : Principal
+data class UserSession(val userId: Int, val username: String, val token: String) : Principal
 
 fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
     route("/simple") {
@@ -69,7 +70,7 @@ fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
         authenticate(AUTH_SESSION) {
             get {
                 val principal = call.principal<UserSession>()!!
-                auth.logout(principal.username)
+                auth.logout(principal.userId)
                 call.sessions.clear(USER_SESSION)
                 call.respondRedirect("/simple/login")
             }
@@ -80,16 +81,34 @@ fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
         authenticate(AUTH_SESSION) {
             get {
                 val principal = call.principal<UserSession>()!!
-                val user = aksjesimulator.getUserByUsername(principal.username)?.toUserVM()
+                val user = aksjesimulator.getUser(principal.userId)?.toUserVM()
                 val params = mapOf("username" to principal.username, "user" to user)
                 call.respond(MustacheContent("accounts.hbs", params))
             }
 
             post {
                 val principal = call.principal<UserSession>()!!
-                val accountParams = call.receiveParameters()
-                aksjesimulator.createAccount(principal.username)
+                val form = call.receiveParameters()
+                val name = form["name"]!!
+                val balance = form["balance"]?.toDoubleOrNull() ?: 0.0
+                val minCommissionFee = form["minCommissionFee"]?.toFloatOrNull() ?: 0f
+                val commissionFee = form["commissionFee"]?.toFloatOrNull() ?: 0f
+                val currencySpread = form["currencySpread"]?.toFloatOrNull() ?: 0f
+                val newAccountDto = NewAccountDto(name, balance, minCommissionFee, commissionFee, currencySpread)
+                aksjesimulator.createAccount(principal.userId, newAccountDto)
                 call.respondRedirect("/simple/accounts")
+            }
+        }
+    }
+
+    route("/simple/accounts/{id}") {
+        authenticate(AUTH_SESSION) {
+            get {
+                val principal = call.principal<UserSession>()!!
+                val accountId = call.parameters["id"]?.toInt()!!
+                val account = aksjesimulator.getUserAccount(principal.userId, accountId)?.toAccountVM()
+                val params = mapOf("username" to principal.username, "account" to account)
+                call.respond(MustacheContent("account.hbs", params))
             }
         }
     }
@@ -102,7 +121,7 @@ fun Application.registerMustacheRoutes(auth: AuthInterface, aksjesimulator: Aksj
     install(Authentication) {
         session<UserSession>(AUTH_SESSION) {
             validate { session ->
-                if (auth.isLoggedIn(session.username, session.token)) {
+                if (auth.isLoggedIn(session.userId, session.token)) {
                     session
                 } else {
                     null
@@ -116,7 +135,7 @@ fun Application.registerMustacheRoutes(auth: AuthInterface, aksjesimulator: Aksj
             validate { credentials ->
                 val sessionToken = auth.login(credentials.name, credentials.password)
                 if (sessionToken != null) {
-                    UserSession(credentials.name, sessionToken.token)
+                    UserSession(sessionToken.userId, credentials.name, sessionToken.token)
                 } else {
                     null
                 }

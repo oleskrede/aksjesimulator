@@ -1,17 +1,25 @@
 package no.aksjesimulator.application
 
-import no.aksjesimulator.application.interfaces.AksjesimRepositoryInterface
-import no.aksjesimulator.domain.models.Account
-import no.aksjesimulator.domain.models.User
+import no.aksjesimulator.application.interfaces.IAksjesimRepository
+import no.aksjesimulator.application.models.Account
+import no.aksjesimulator.application.models.User
+import no.aksjesimulator.application.models.dto.NewAccountDto
+import no.aksjesimulator.application.models.dto.NewUserDto
 
-class Aksjesimulator(val aksjesimRepository: AksjesimRepositoryInterface) {
+class Aksjesimulator(val aksjesimRepository: IAksjesimRepository) {
 
-    fun getUserByUsername(username: String): User? = aksjesimRepository.getUserByUsername(username)
+    fun getUser(userId: Int): User? =
+        aksjesimRepository.getUser(userId)
 
-    fun createUser(userDto: UserDto): User = aksjesimRepository.createUser(userDto)
+    fun createUser(userDto: NewUserDto): User =
+        aksjesimRepository.createUser(userDto)
 
-    fun deleteUser(userId: Int): Boolean = aksjesimRepository.deleteUser(userId)
+    fun deleteUser(userId: Int): Boolean =
+        aksjesimRepository.deleteUser(userId)
+
+    fun createAccount(userId: Int, newAccountDto: NewAccountDto): Boolean =
+        aksjesimRepository.createAccount(userId, newAccountDto)
+
+    fun getUserAccount(userId: Int, accountId: Int): Account? =
+        aksjesimRepository.getUserAccount(userId, accountId)
 }
-
-data class UserDto(val username: String, val password: String, val email: String? = null, val accounts: List<Account> = emptyList())
-

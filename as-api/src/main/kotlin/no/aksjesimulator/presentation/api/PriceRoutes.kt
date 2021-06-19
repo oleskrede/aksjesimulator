@@ -1,16 +1,9 @@
 package no.aksjesimulator
 
 import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
-import io.ktor.response.respondText
 import io.ktor.routing.Route
-import io.ktor.routing.get
-import io.ktor.routing.routing
-import no.aksjesimulator.infrastructure.PriceRepository
 
-fun Route.priceRouting(priceRepository: PriceRepository) {
+fun Route.priceRouting() {
 //    get("/price") {
 //        call.respond(priceRepository.getAllPrices())
 //    }
@@ -25,7 +18,7 @@ fun Route.priceRouting(priceRepository: PriceRepository) {
 //    }
 }
 
-fun Application.registerPriceRoutes(priceRepository: PriceRepository) {
+fun Application.registerPriceRoutes() {
 //    routing {
 //        priceRouting(priceRepository)
 //    }

@@ -1,0 +1,31 @@
+{{> header}}
+
+<div class="mainContent">
+
+  <h2>Konto: {{account.name}}</h1>
+
+    <p>Balanse: {{account.balance}} NOK</p>
+
+    <table>
+      <caption>Beholdning</caption>
+      <tr>
+        <th>Ticker</th>
+        <th>Navn</th>
+        <th>Antall</th>
+        <th>GAV</th>
+        <th>Verdi</th>
+      </tr>
+      {{#account.holdings}}
+        <tr>
+          <td>{{ticker.ticker}}</td>
+          <td>{{ticker.name}}</td>
+          <td>{{amount}}</td>
+          <td>{{gav}}</td>
+          <td>{{ticker.price}}</td>
+        </tr>
+      {{/account.holdings}}
+    </table>
+
+</div>
+
+{{> footer}}

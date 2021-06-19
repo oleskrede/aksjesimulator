@@ -1,5 +1,25 @@
 # aksjesimulator
 
+## TODOs
+
+
+- TODO pris/bank/konto templates ved ny konto
+- TODO hente inn reelle aksjekursar
+- TODO sette opp database
+- TODO lagre kursar til database
+- TODO vise konto
+- TODO vise aksjer
+- TODO handle aksjer
+- TODO endre konto
+- TODO slette konto
+- TODO profil endre passord
+- TODO profil reset passord via email
+- TODO vise endring over tid på kontovisning
+- TODO vise endring over tid på aksjevisning
+- TODO hente inn fleire aksjer
+- TODO errorHandling (use of !!)
+ 
+
 ## Dokumentasjon
 
 #### Kjøre lokalt

@@ -1,7 +1,8 @@
 package no.aksjesimulator.application
 
-import no.aksjesimulator.application.interfaces.AksjesimRepositoryInterface
+import no.aksjesimulator.application.interfaces.IAksjesimRepository
 import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 
 const val SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7L
 const val TOKEN_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
@@ -9,58 +10,56 @@ const val TOKEN_LENGTH = 150
 
 interface AuthInterface {
     fun login(username: String, password: String): SessionToken?
-    fun logout(username: String): Boolean
-    fun isLoggedIn(username: String, token: String): Boolean
+    fun logout(userId: Int): Boolean
+    fun isLoggedIn(userId: Int, token: String): Boolean
 }
 
 class AuthStub : AuthInterface {
     override fun login(username: String, password: String): SessionToken? =
-        SessionToken("tokenDummy", LocalDateTime.now().plusDays(7))
+        SessionToken(1, "tokenDummy", now().plusDays(7))
 
-    override fun logout(username: String): Boolean = true
-    override fun isLoggedIn(username: String, token: String): Boolean = true
+    override fun logout(userId: Int): Boolean = true
+    override fun isLoggedIn(userId: Int, token: String): Boolean = true
 }
 
 class Auth(
-    val aksjesimRepository: AksjesimRepositoryInterface,
+    val aksjesimRepository: IAksjesimRepository,
     val sessionDuration: Long = SEVEN_DAYS_IN_SECONDS
 ) :
     AuthInterface {
-    private val sessions = mutableMapOf<String, SessionToken>() // <username, SessionToken>
+    private val sessions = mutableMapOf<Int, SessionToken>() // <userId, SessionToken>
 
-    private fun generateSessionToken(): SessionToken {
+    private fun generateSessionToken(userId: Int): SessionToken {
         val token = List(TOKEN_LENGTH) { TOKEN_CHARSET.random() }
             .joinToString("")
-        val validUntil = LocalDateTime.now().plusSeconds(sessionDuration)
-        return SessionToken(token, validUntil)
+        val validUntil = now().plusSeconds(sessionDuration)
+        return SessionToken(userId, token, validUntil)
     }
 
     override fun login(username: String, password: String): SessionToken? {
-        val userPassword = aksjesimRepository.getUserByUsername(username)?.password ?: return null
-        if (password != userPassword) return null
+        val user = aksjesimRepository.getUserByUsername(username) ?: return null
+        if (password != user.password) return null
 
-        val sessionToken = generateSessionToken()
-        sessions[username] = sessionToken
+        val sessionToken = generateSessionToken(user.id)
+        sessions[user.id] = sessionToken
 
         return sessionToken
     }
 
-    override fun logout(username: String): Boolean {
-        return sessions.remove(username) != null
+    override fun logout(userId: Int): Boolean {
+        return sessions.remove(userId) != null
     }
 
-    override fun isLoggedIn(username: String, token: String): Boolean {
-        if (username.isNullOrEmpty()) return false
-
-        val sessionIsExpired = sessions[username]?.expiry?.isBefore(LocalDateTime.now()) ?: true
+    override fun isLoggedIn(userId: Int, token: String): Boolean {
+        val sessionIsExpired = sessions[userId]?.expiry?.isBefore(LocalDateTime.now()) ?: true
         if (sessionIsExpired) {
-            logout(username)
+            logout(userId)
             return false
         }
 
-        val tokenIsValid = sessions[username]?.token == token
+        val tokenIsValid = sessions[userId]?.token == token
         return tokenIsValid
     }
 }
 
-data class SessionToken(val token: String, val expiry: LocalDateTime)
+data class SessionToken(val userId: Int, val token: String, val expiry: LocalDateTime)

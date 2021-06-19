@@ -4,11 +4,11 @@ import no.aksjesimulator.application.Aksjesimulator
 import no.aksjesimulator.application.Auth
 import no.aksjesimulator.application.AuthInterface
 import no.aksjesimulator.application.AuthStub
-import no.aksjesimulator.application.interfaces.AksjesimRepositoryInterface
+import no.aksjesimulator.application.interfaces.IAksjesimRepository
 import no.aksjesimulator.infrastructure.repository.stubs.AksjesimRepositoryStub
 
 class DependencyInjection(
-    aksjesimRepository: AksjesimRepositoryInterface = AksjesimRepositoryStub()
+    aksjesimRepository: IAksjesimRepository = AksjesimRepositoryStub()
 ) {
     var aksjesimulator: Aksjesimulator
     var login: AuthInterface
