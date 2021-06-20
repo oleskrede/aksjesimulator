@@ -3,7 +3,7 @@ package no.aksjesimulator.infrastructure.repository.stubs
 import no.aksjesimulator.application.interfaces.IAksjesimRepository
 import no.aksjesimulator.application.models.Account
 import no.aksjesimulator.application.models.AccountHolding
-import no.aksjesimulator.application.models.Ticker
+import no.aksjesimulator.application.models.Stock
 import no.aksjesimulator.application.models.User
 import no.aksjesimulator.application.models.dto.NewAccountDto
 import no.aksjesimulator.application.models.dto.NewUserDto
@@ -11,27 +11,27 @@ import no.aksjesimulator.application.models.dto.NewUserDto
 class AksjesimRepositoryStub : IAksjesimRepository {
     private val users = mutableListOf<User>()
 
-    private var userIdGenerator = 0
+    private var userIdGenerator = 1
     private fun generateUserId() = userIdGenerator++
 
-    private var accountIdGenerator = 0
-    private fun generateAccountId() = userIdGenerator++
+    private var accountIdGenerator = 1
+    private fun generateAccountId() = accountIdGenerator++
 
-    private val prices = mutableMapOf<String, Ticker>()
+    private val tickers = mutableMapOf<String, Stock>()
 
     init {
-        val tel = Ticker("TEL", "Telenor", 143.5500)
-        val nhy = Ticker("NHY", "Norsk Hydro", 53.9400)
-        val dnb = Ticker("DNB", "DNB", 188.6000)
-        val sbank = Ticker("SBANK", "Sbanken", 107.8000)
-        prices[tel.ticker] = tel
-        prices[nhy.ticker] = nhy
-        prices[dnb.ticker] = dnb
-        prices[sbank.ticker] = sbank
+        val tel = Stock("TEL", "Telenor", 143.5500)
+        val nhy = Stock("NHY", "Norsk Hydro", 53.9400)
+        val dnb = Stock("DNB", "DNB", 188.6000)
+        val sbank = Stock("SBANK", "Sbanken", 107.8000)
+        tickers[tel.ticker] = tel
+        tickers[nhy.ticker] = nhy
+        tickers[dnb.ticker] = dnb
+        tickers[sbank.ticker] = sbank
 
         val holdings = mutableListOf(
-            AccountHolding(prices["TEL"]!!, 10, 140.0),
-            AccountHolding(prices["DNB"]!!, 23, 153.0),
+            AccountHolding(tickers["TEL"]!!, 10, 140.0),
+            AccountHolding(tickers["DNB"]!!, 23, 153.0),
         )
         val account = Account(
             id = generateAccountId(),
@@ -84,11 +84,7 @@ class AksjesimRepositoryStub : IAksjesimRepository {
         return getUser(userId)?.accounts?.find { it.id == accountId } ?: null
     }
 
-    fun getAllPrices(): Set<Ticker> {
-        return prices.values.toSet()
-    }
-
-    fun getPrice(ticker: String): Ticker? {
-        return prices[ticker]
+    override fun getTickers(): List<Stock> {
+        return tickers.values.toList()
     }
 }

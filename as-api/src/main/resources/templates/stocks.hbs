@@ -1,0 +1,23 @@
+{{> header}}
+
+<div class="mainContent">
+
+    <table>
+      <caption>Aksjer</caption>
+      <tr>
+        <th>Navn</th>
+        <th>Verdi <small>(NOK)</small></th>
+      </tr>
+
+      {{#stocks}}
+        <tr>
+          <td><a href="/simple/stocks/{{ticker}}">{{name}}</a></td>
+          <td>{{price}}</td>
+        </tr>
+      {{/stocks}}
+
+    </table>
+
+</div>
+
+{{> footer}}

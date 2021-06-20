@@ -1,6 +1,6 @@
 package no.aksjesimulator.application.models
 
-data class Ticker(
+data class Stock(
     val ticker: String,
     val name: String,
     val price: Double

@@ -27,6 +27,7 @@ import no.aksjesimulator.application.Aksjesimulator
 import no.aksjesimulator.application.AuthInterface
 import no.aksjesimulator.application.models.dto.NewAccountDto
 import no.aksjesimulator.presentation.mustache.viewmodels.toAccountVM
+import no.aksjesimulator.presentation.mustache.viewmodels.toStockVM
 import no.aksjesimulator.presentation.mustache.viewmodels.toUserVM
 
 private val emptyMap = emptyMap<String, Any>()
@@ -109,6 +110,17 @@ fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
                 val account = aksjesimulator.getUserAccount(principal.userId, accountId)?.toAccountVM()
                 val params = mapOf("username" to principal.username, "account" to account)
                 call.respond(MustacheContent("account.hbs", params))
+            }
+        }
+    }
+
+    route("/simple/stocks") {
+        authenticate(AUTH_SESSION) {
+            get {
+                val principal = call.principal<UserSession>()!!
+                val stocks = aksjesimulator.getTickers().map { it.toStockVM() }
+                val params = mapOf("username" to principal.username, "stocks" to stocks)
+                call.respond(MustacheContent("stocks.hbs", params))
             }
         }
     }

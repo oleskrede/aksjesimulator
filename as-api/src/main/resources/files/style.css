@@ -28,6 +28,19 @@ h1 {
   color: var(--as-dark);
 }
 
+table {
+  border-top: 1px solid var(--as-dark);
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 50rem;
+}
+
+td, th {
+  text-align: left;
+  border-bottom: 1px solid var(--as-light);
+}
+
 .mainContent {
   margin: 2rem;
 }
@@ -37,11 +50,14 @@ h1 {
   white-space: nowrap;
 }
 
+.headerLinksRight {
+  float: right;
+}
+
 .loginBox {
   max-width: 15rem;
   margin: 3rem auto auto auto;
 }
-
 
 .centered {
   margin-left: auto;
@@ -51,21 +67,22 @@ h1 {
 /* Background color */
 
 .bg-green-100 {
-  --tw-bg-opacity : 1;
+  --tw-bg-opacity: 1;
   background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
 }
 
 .bg-blue-50 {
-  --tw-bg-opacity : 1;
+  --tw-bg-opacity: 1;
   background-color: rgba(239, 246, 255, var(--tw-bg-opacity));
 }
 
 .bg-blue-200 {
-  --tw-bg-opacity : 1;
+  --tw-bg-opacity: 1;
   background-color: rgba(219, 234, 254, var(--tw-bg-opacity));
 }
 
 /* Float */
+
 .float-right {
   float: right;
 }
@@ -101,7 +118,8 @@ h1 {
 }
 
 /* Padding */
+
 .px-4 {
-  padding-left : 1rem;
+  padding-left: 1rem;
   padding-right: 1rem;
 }
