@@ -92,5 +92,6 @@ while True:
     json_data = scrape_for_exchange(ose_url, browser)
     log("Sending to kafka")
     send_to_topic(topic, json_data)
-    log('Iteration complete. Waiting 15 minutes before next iteration.')
-    time.sleep(60*15)
+
+    log('Iteration complete. Waiting 4 minutes before next iteration.')
+    time.sleep(60*4)
