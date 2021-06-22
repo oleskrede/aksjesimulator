@@ -118,9 +118,21 @@ fun Route.mustacheRouting(auth: AuthInterface, aksjesimulator: Aksjesimulator) {
         authenticate(AUTH_SESSION) {
             get {
                 val principal = call.principal<UserSession>()!!
-                val stocks = aksjesimulator.getTickers().map { it.toStockVM() }
+                val stocks = aksjesimulator.getStocks().map { it.toStockVM() }
                 val params = mapOf("username" to principal.username, "stocks" to stocks)
                 call.respond(MustacheContent("stocks.hbs", params))
+            }
+        }
+    }
+
+    route("/simple/stocks/{ticker}") {
+        authenticate(AUTH_SESSION) {
+            get {
+                val principal = call.principal<UserSession>()!!
+                val ticker = call.parameters["ticker"]!!
+                val stock = aksjesimulator.getStock(ticker)
+                val params = mapOf("username" to principal.username, "stock" to stock)
+                call.respond(MustacheContent("stock.hbs", params))
             }
         }
     }

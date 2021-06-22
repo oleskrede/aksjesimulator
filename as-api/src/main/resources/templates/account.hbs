@@ -1,6 +1,6 @@
 {{> header}}
 
-<div class="mainContent">
+<div>
 
   <h2>Konto: {{account.name}}</h2>
 
@@ -17,7 +17,7 @@
 
       {{#account.holdings}}
         <tr>
-          <td>{{stock.name}}</td>
+          <td><a href="/simple/stocks/{{stock.ticker}}">{{stock.name}}</a></td>
           <td>{{amount}}</td>
           <td>{{gav}}</td>
           <td>{{stock.price}}</td>

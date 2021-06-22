@@ -1,0 +1,23 @@
+{{> header}}
+
+<div>
+
+  <h2>{{stock.name}} <small>({{stock.ticker}})</small></h2>
+
+  <div style="display: flex; align-items: center;">
+    <div class="mr-2">
+      <p>Siste pris: <br />
+        <big>{{stock.price}} NOK</big>
+      </p>
+    </div>
+
+    <div>
+      <a class="mr-1" href="/simple/stocks/{{stock.ticker}}/buy">Kjøp</a>
+      <a href="/simple/stocks/{{stock.ticker}}/sell">Selg</a>
+    </div>
+  </div>
+
+
+</div>
+
+{{> footer}}

@@ -8,32 +8,33 @@
 </head>
 
 <body>
+  <div class="pageContent">
 
-  <div style="padding: 0 1rem 1rem 1rem;">
-    <h1>Aksjesimulator</h1>
+    <div>
+      <h1>Aksjesimulator</h1>
 
-    <nav>
-      <div>
-        {{#username}}
-        <a class="headerLink" href="/simple/accounts">Kontoer</a>
-        <a class="headerLink" href="/simple/stocks">Aksjer</a>
-        {{/username}}
-
-        <div class="headerLinksRight">
-          <a class="headerLink" href="/simple/faq">FAQ</a>
+      <nav>
+        <div>
           {{#username}}
-          <a class="headerLink" href="/simple/profile">Profil</a>
-          <a class="headerLink" href="/simple/logout">Logg ut</a>
-          {{/username}}
-          {{^username}}
-          <a class="headerLink" href="/simple/login">Logg inn</a>
+          <a class="headerLink mr-1" href="/simple/accounts">Kontoer</a>
+          <a class="headerLink" href="/simple/stocks">Aksjer</a>
           {{/username}}
 
+          <div class="headerLinksRight">
+            <a class="headerLink mr-1" href="/simple/faq">FAQ</a>
+            {{#username}}
+            <a class="headerLink mr-1" href="/simple/profile">Profil</a>
+            <a class="headerLink" href="/simple/logout">Logg ut</a>
+            {{/username}}
+            {{^username}}
+            <a class="headerLink" href="/simple/login">Logg inn</a>
+            {{/username}}
+
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
-  </div>
-  <hr />
+    </div>
+    <hr />
 
-  <div class="mainContent">
+    <div>

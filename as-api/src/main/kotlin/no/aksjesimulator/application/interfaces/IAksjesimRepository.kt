@@ -13,5 +13,6 @@ interface IAksjesimRepository {
     fun deleteUser(userId: Int): Boolean
     fun createAccount(userId: Int, newAccountDto: NewAccountDto): Boolean
     fun getUserAccount(userId: Int, accountId: Int): Account?
-    fun getTickers(): List<Stock>
+    fun getStocks(): List<Stock>
+    fun getStock(ticker: String): Stock?
 }

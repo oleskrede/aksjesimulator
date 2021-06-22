@@ -17,21 +17,21 @@ class AksjesimRepositoryStub : IAksjesimRepository {
     private var accountIdGenerator = 1
     private fun generateAccountId() = accountIdGenerator++
 
-    private val tickers = mutableMapOf<String, Stock>()
+    private val stocks = mutableMapOf<String, Stock>()
 
     init {
         val tel = Stock("TEL", "Telenor", 143.5500)
         val nhy = Stock("NHY", "Norsk Hydro", 53.9400)
         val dnb = Stock("DNB", "DNB", 188.6000)
         val sbank = Stock("SBANK", "Sbanken", 107.8000)
-        tickers[tel.ticker] = tel
-        tickers[nhy.ticker] = nhy
-        tickers[dnb.ticker] = dnb
-        tickers[sbank.ticker] = sbank
+        stocks[tel.ticker] = tel
+        stocks[nhy.ticker] = nhy
+        stocks[dnb.ticker] = dnb
+        stocks[sbank.ticker] = sbank
 
         val holdings = mutableListOf(
-            AccountHolding(tickers["TEL"]!!, 10, 140.0),
-            AccountHolding(tickers["DNB"]!!, 23, 153.0),
+            AccountHolding(stocks["TEL"]!!, 10, 140.0),
+            AccountHolding(stocks["DNB"]!!, 23, 153.0),
         )
         val account = Account(
             id = generateAccountId(),
@@ -84,7 +84,11 @@ class AksjesimRepositoryStub : IAksjesimRepository {
         return getUser(userId)?.accounts?.find { it.id == accountId } ?: null
     }
 
-    override fun getTickers(): List<Stock> {
-        return tickers.values.toList()
+    override fun getStocks(): List<Stock> {
+        return stocks.values.toList()
+    }
+
+    override fun getStock(ticker: String): Stock? {
+        return stocks[ticker]
     }
 }

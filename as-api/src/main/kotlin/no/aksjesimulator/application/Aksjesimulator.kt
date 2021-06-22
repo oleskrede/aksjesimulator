@@ -24,6 +24,9 @@ class Aksjesimulator(val aksjesimRepository: IAksjesimRepository) {
     fun getUserAccount(userId: Int, accountId: Int): Account? =
         aksjesimRepository.getUserAccount(userId, accountId)
 
-    fun getTickers(): List<Stock> =
-        aksjesimRepository.getTickers()
+    fun getStocks(): List<Stock> =
+        aksjesimRepository.getStocks()
+
+    fun getStock(ticker: String): Stock? =
+        aksjesimRepository.getStock(ticker)
 }
