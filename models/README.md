@@ -1,4 +1,7 @@
-# Aksjesimulator models
+# *OUTDATED* Aksjesimulator models
+
+Not up to date. Will probably be updated when development on 
+as-api has stabilized. 
 
 Specified with OpenAPI
 

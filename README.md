@@ -7,7 +7,6 @@
 - TODO hente inn reelle aksjekursar
 - TODO sette opp database
 - TODO lagre kursar til database
-- TODO vise konto
 - TODO vise aksjer
 - TODO handle aksjer
 - TODO endre konto
@@ -19,6 +18,7 @@
 - TODO hente inn fleire aksjer
 - TODO errorHandling (use of !!)
 - TODO nedlasting av geckodriver i webscraper Dockerfile
+- TODO Jackson instead of Gson mapper in Ktor?
  
 
 ## Dokumentasjon

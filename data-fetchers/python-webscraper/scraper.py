@@ -93,5 +93,5 @@ while True:
     log("Sending to kafka")
     send_to_topic(topic, json_data)
 
-    log('Iteration complete. Waiting 4 minutes before next iteration.')
-    time.sleep(60*4)
+    log('Iteration complete. Waiting 5 minutes before next iteration.')
+    time.sleep(60*5)
