@@ -1,20 +1,42 @@
 package no.aksjesimulator
 
+import com.beust.klaxon.Klaxon
 import com.github.mustachejava.DefaultMustacheFactory
-import io.ktor.application.Application
-import io.ktor.application.install
-import io.ktor.features.ContentNegotiation
-import io.ktor.gson.gson
-import io.ktor.http.content.resources
-import io.ktor.http.content.static
-import io.ktor.mustache.Mustache
-import io.ktor.routing.IgnoreTrailingSlash
-import io.ktor.routing.routing
+import io.ktor.application.*
+import io.ktor.features.*
+import io.ktor.gson.*
+import io.ktor.http.content.*
+import io.ktor.mustache.*
+import io.ktor.routing.*
+import no.aksjesimulator.application.models.dto.QuoteDto
+import no.aksjesimulator.application.models.dto.toQuote
+import no.aksjesimulator.infrastructure.kafka.createConsumer
 import no.aksjesimulator.presentation.mustache.registerMustacheRoutes
+import java.time.Duration
+import java.util.*
+import kotlin.concurrent.schedule
+
+const val FIVE_SECONDS = 5*1000L
+const val ONE_MINUTE = 60*1000L
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-fun Application.module(depInj: DependencyInjection = DependencyInjection()) {
+fun Application.module() {
+
+    val kafkaConsumer = createConsumer()
+    kafkaConsumer.subscribe(listOf("quotes"))
+
+
+    Timer().schedule(FIVE_SECONDS, ONE_MINUTE) {
+        val records = kafkaConsumer.poll(Duration.ofSeconds(5))
+        records.iterator().forEach {
+            val quotesJson = it.value()
+            val quotes = Klaxon().parseArray<QuoteDto>(quotesJson)
+                ?.map { dto -> dto.toQuote() } ?: emptyList()
+            Dependencies.aksjesimulator.updateStockPrices(quotes)
+        }
+    }
+
     install(IgnoreTrailingSlash)
     install(ContentNegotiation) { gson() }
     install(Mustache) {
@@ -29,5 +51,5 @@ fun Application.module(depInj: DependencyInjection = DependencyInjection()) {
             resources("files")
         }
     }
-    registerMustacheRoutes(depInj.login, depInj.aksjesimulator)
+    registerMustacheRoutes(Dependencies.login, Dependencies.aksjesimulator)
 }

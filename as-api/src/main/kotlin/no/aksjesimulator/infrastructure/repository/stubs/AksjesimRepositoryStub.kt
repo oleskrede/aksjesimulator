@@ -7,6 +7,7 @@ import no.aksjesimulator.application.models.Stock
 import no.aksjesimulator.application.models.User
 import no.aksjesimulator.application.models.dto.NewAccountDto
 import no.aksjesimulator.application.models.dto.NewUserDto
+import no.aksjesimulator.application.models.dto.Quote
 
 class AksjesimRepositoryStub : IAksjesimRepository {
     private val users = mutableListOf<User>()
@@ -48,8 +49,8 @@ class AksjesimRepositoryStub : IAksjesimRepository {
         users.add(user)
     }
 
-    override fun getUser(id: Int): User? {
-        return users.find { it.id == id }
+    override fun getUser(userId: Int): User? {
+        return users.find { it.id == userId }
     }
 
     override fun getUserByUsername(username: String): User? {
@@ -63,32 +64,43 @@ class AksjesimRepositoryStub : IAksjesimRepository {
         return user
     }
 
-    override fun deleteUser(id: Int): Boolean {
-        return users.removeIf { it.id == id }
+    override fun deleteUser(userId: Int): Boolean {
+        return users.removeIf { it.id == userId }
     }
 
-    override fun createAccount(userId: Int, account: NewAccountDto): Boolean {
+    override fun createAccount(userId: Int, newAccountDto: NewAccountDto): Boolean {
         val user = getUser(userId)!!
         val account = Account(
             id = generateAccountId(),
-            name = account.name,
-            balance = account.balance,
-            minCommissionFee = account.minCommissionFee,
-            commissionFee = account.commissionFee,
-            currencySpread = account.currencySpread
+            name = newAccountDto.name,
+            balance = newAccountDto.balance,
+            minCommissionFee = newAccountDto.minCommissionFee,
+            commissionFee = newAccountDto.commissionFee,
+            currencySpread = newAccountDto.currencySpread
         )
         return user.accounts.add(account)
     }
 
     override fun getUserAccount(userId: Int, accountId: Int): Account? {
-        return getUser(userId)?.accounts?.find { it.id == accountId } ?: null
+        return getUser(userId)?.accounts?.find { it.id == accountId }
     }
 
     override fun getStocks(): List<Stock> {
-        return stocks.values.toList()
+        return stocks.values.sortedBy { it.name }
     }
 
     override fun getStock(ticker: String): Stock? {
         return stocks[ticker]
+    }
+
+    override fun updateStocks(quotes: List<Quote>) {
+        quotes.forEach {
+            if (it.ticker in stocks) {
+                stocks[it.ticker]?.price = it.price
+            }
+            else {
+                stocks[it.ticker] = Stock(it.ticker, it.name, it.price)
+            }
+        }
     }
 }

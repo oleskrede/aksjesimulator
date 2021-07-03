@@ -6,6 +6,7 @@ import no.aksjesimulator.application.models.Stock
 import no.aksjesimulator.application.models.User
 import no.aksjesimulator.application.models.dto.NewAccountDto
 import no.aksjesimulator.application.models.dto.NewUserDto
+import no.aksjesimulator.application.models.dto.Quote
 
 class Aksjesimulator(val aksjesimRepository: IAksjesimRepository) {
 
@@ -25,8 +26,10 @@ class Aksjesimulator(val aksjesimRepository: IAksjesimRepository) {
         aksjesimRepository.getUserAccount(userId, accountId)
 
     fun getStocks(): List<Stock> =
-        aksjesimRepository.getStocks()
+        aksjesimRepository.getStocks().sortedBy { it.name }
 
-    fun getStock(ticker: String): Stock? =
-        aksjesimRepository.getStock(ticker)
+    fun getStock(ticker: String): Stock? = aksjesimRepository.getStock(ticker)
+
+    fun updateStockPrices(quotes: List<Quote>) = aksjesimRepository.updateStocks(quotes)
 }
+

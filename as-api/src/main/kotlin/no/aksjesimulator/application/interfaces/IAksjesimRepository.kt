@@ -5,6 +5,7 @@ import no.aksjesimulator.application.models.Stock
 import no.aksjesimulator.application.models.User
 import no.aksjesimulator.application.models.dto.NewAccountDto
 import no.aksjesimulator.application.models.dto.NewUserDto
+import no.aksjesimulator.application.models.dto.Quote
 
 interface IAksjesimRepository {
     fun getUser(userId: Int): User?
@@ -15,4 +16,5 @@ interface IAksjesimRepository {
     fun getUserAccount(userId: Int, accountId: Int): Account?
     fun getStocks(): List<Stock>
     fun getStock(ticker: String): Stock?
+    fun updateStocks(quotes: List<Quote>)
 }

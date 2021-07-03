@@ -35,7 +35,8 @@ dependencies {
     implementation "io.ktor:ktor-server-sessions:$ktor_version"
     implementation "io.ktor:ktor-auth:$ktor_version"
     // implementation "no.aksjesimulator:datamodels:$aksjesimulator_datamodels_version"
-    implementation "org.apache.kafka:kafka-clients:2.0.0"
+    implementation "org.apache.kafka:kafka-clients:2.0.1"
+    implementation "com.beust:klaxon:5.5"
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }

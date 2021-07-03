@@ -1,4 +1,4 @@
-package no.aksjesimulator.presentation.mustache.viewmodels
+package no.aksjesimulator.presentation.mustache
 
 import no.aksjesimulator.application.models.Account
 import no.aksjesimulator.application.models.AccountHolding
@@ -13,7 +13,7 @@ data class AccountVM(val name: String, val balance: Int, val holdings: List<Acco
 
 data class AccountHoldingVM(val stock: StockVM, val amount: Long, val gav: Double)
 
-data class StockVM(val ticker: String, val name: String, val price: Double)
+data class StockVM(val ticker: String, val name: String, val price: String)
 
 fun User.toUserVM(): UserVM {
     val accountOverviewVMs = accounts?.map { it.toAccountOverviewVM() }
@@ -43,5 +43,5 @@ fun AccountHolding.toAccountHoldingVM(): AccountHoldingVM {
 }
 
 fun Stock.toStockVM(): StockVM {
-    return StockVM(ticker, name, price)
+    return StockVM(ticker, name, "%.2".format(price))
 }
