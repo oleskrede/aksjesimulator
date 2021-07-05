@@ -1,34 +1,15 @@
 package no.aksjesimulator.presentation.mustache
 
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.auth.Authentication
-import io.ktor.auth.Principal
-import io.ktor.auth.authenticate
-import io.ktor.auth.form
-import io.ktor.auth.principal
-import io.ktor.auth.session
-import io.ktor.mustache.MustacheContent
-import io.ktor.request.receiveParameters
-import io.ktor.response.respond
-import io.ktor.response.respondRedirect
-import io.ktor.routing.Route
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.route
-import io.ktor.routing.routing
-import io.ktor.sessions.Sessions
-import io.ktor.sessions.cookie
-import io.ktor.sessions.get
-import io.ktor.sessions.sessions
-import io.ktor.sessions.set
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.mustache.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.sessions.*
 import no.aksjesimulator.application.Aksjesimulator
 import no.aksjesimulator.application.AuthInterface
 import no.aksjesimulator.application.models.dto.NewAccountDto
-import no.aksjesimulator.presentation.mustache.viewmodels.toAccountVM
-import no.aksjesimulator.presentation.mustache.viewmodels.toStockVM
-import no.aksjesimulator.presentation.mustache.viewmodels.toUserVM
 
 private val emptyMap = emptyMap<String, Any>()
 private const val AUTH_FORM = "auth-form"

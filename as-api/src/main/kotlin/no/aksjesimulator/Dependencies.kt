@@ -7,7 +7,7 @@ import no.aksjesimulator.application.AuthStub
 import no.aksjesimulator.application.interfaces.IAksjesimRepository
 import no.aksjesimulator.infrastructure.repository.stubs.AksjesimRepositoryStub
 
-object Dependencies{
+internal object Dependencies{
     val aksjesimRepository: IAksjesimRepository = AksjesimRepositoryStub()
     val aksjesimulator: Aksjesimulator = Aksjesimulator(aksjesimRepository)
 //    login = Auth(aksjesimRepository)

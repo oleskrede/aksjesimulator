@@ -23,6 +23,8 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
 
+    Configuration.initDB()
+
     val kafkaConsumer = createConsumer()
     kafkaConsumer.subscribe(listOf("quotes"))
 
