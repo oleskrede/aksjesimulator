@@ -43,6 +43,7 @@ dependencies {
     implementation("com.natpryce:konfig:$konfigVersion") // Configuration API
     implementation "com.zaxxer:HikariCP:$hikariVersion" // JDBC Connection Pool
     implementation "org.postgresql:postgresql:$postgresqlVersion" // JDBC Connector for PostgreSQL
+    implementation "org.flywaydb:flyway-core:$flywayVersion" // Flyway for database migration
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }

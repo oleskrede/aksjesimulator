@@ -8,6 +8,7 @@ import com.natpryce.konfig.overriding
 import com.natpryce.konfig.stringType
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 
 // TODO merge with Ktors application.conf somehow?
@@ -31,7 +32,9 @@ internal object Configuration {
 
         val dataSource = HikariDataSource(hikariConfig)
         Database.connect(dataSource)
-//        createTables()
+
+        Flyway.configure().dataSource(dataSource).load().migrate()
+
         println("Database initialized")
     }
 
