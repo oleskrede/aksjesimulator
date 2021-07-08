@@ -3,12 +3,14 @@ version: '3.4'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    restart: always
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    restart: always
     depends_on:
       - zookeeper
     ports:
@@ -21,7 +23,23 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
   
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: aksjesim
+      POSTGRES_PASSWORD: db-87h23jh23
+      POSTGRES_DB: aksjesim_db
+    ports:
+      - 5432:5432
+    volumes: 
+      - db-data:/var/lib/postgresql/data/
+  
   pythonwebscraper:
     image: pythonwebscraper
+    restart: always
     build:
       context: ./data-fetchers/python-webscraper
+
+volumes: 
+  db-data:

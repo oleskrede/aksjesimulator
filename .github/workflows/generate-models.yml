@@ -1,4 +1,4 @@
-name: Generate and publish Aksjesimulator Kotlin models to GitHub Packages
+name: Generate and publish models to GitHub Packages
 
 on:
   push:
@@ -13,26 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-      - name: Install openapi-generator
-        run: |
-          cd models
-          npm install @openapitools/openapi-generator-cli
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
       - name: Generate docs
         run: |
           cd models
-          npx @openapitools/openapi-generator-cli generate \
-            -g kotlin \
-            -i openapi.yaml \
-            -o generated-kotlin \
-            --global-property models
-      - name: Commit and push generated models
-        run: |
-          git config --global user.name generate-models-bot
-          git config --global user.email generate-models-bot@users.noreply.github.com
-          git add models/generated-kotlin/*
-          git commit -m "Generated models updated according to latest spec"
-          git push
+          rm -r generated-kotlin/docs
+          rm -r generated-kotlin/src
+          wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.1.0/openapi-generator-cli-5.1.0.jar -O openapi-generator-cli.jar
+          java -jar openapi-generator-cli.jar generate \
+              -i openapi.yaml \
+              -g kotlin \
+              -o generated-kotlin \
+              --additional-properties=enumPropertyNaming=UPPERCASE \
+              --additional-properties=artifactId=datamodels \
+              --additional-properties=groupId=no.aksjesimulator \
+              --additional-properties=packageName=no.aksjesimulator.domain \
+              --global-property=models
       - name: Build and publish Gradle package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,3 +40,11 @@ jobs:
           cd models/generated-kotlin
           ./gradlew build
           ./gradlew publish
+      - name: Commit and push generated models
+        run: |
+          git config --global user.name generate-models-bot
+          git config --global user.email generate-models-bot@noreply.aksjesimulator.no
+          git add models/generated-kotlin/docs
+          git add models/generated-kotlin/src
+          git commit -m "Generated models updated according to openapi.yaml"
+          git push

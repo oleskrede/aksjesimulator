@@ -5,7 +5,7 @@ plugins {
 }
 
 
-group 'me.oleskrede'
+group 'no.aksjesimulator'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -14,6 +14,14 @@ repositories {
     maven {
         url "https://kotlin.bintray.com/kotlinx"
     }
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/oleskrede/aksjesimulator")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
+            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -21,10 +29,21 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-serialization:$ktor_version"
-    implementation("io.ktor:ktor-gson:$ktor_version")
+    implementation "io.ktor:ktor-gson:$ktor_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "io.ktor:ktor-mustache:$ktor_version"
     implementation "io.ktor:ktor-server-sessions:$ktor_version"
+    implementation "io.ktor:ktor-auth:$ktor_version"
+    // implementation "no.aksjesimulator:datamodels:$aksjesimulator_datamodels_version"
+    implementation "org.apache.kafka:kafka-clients:$kafkaVersion"
+    implementation "com.beust:klaxon:$klaxonVersion" // JSON parser
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion") // ORM Framework
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("com.natpryce:konfig:$konfigVersion") // Configuration API
+    implementation "com.zaxxer:HikariCP:$hikariVersion" // JDBC Connection Pool
+    implementation "org.postgresql:postgresql:$postgresqlVersion" // JDBC Connector for PostgreSQL
+    implementation "org.flywaydb:flyway-core:$flywayVersion" // Flyway for database migration
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
@@ -37,5 +56,5 @@ compileTestKotlin {
 }
 
 application {
-    mainClassName = 'no.aksjesimulator.ApplicationKt'
+    mainClassName = 'no.aksjesimulator.ServerKt'
 }

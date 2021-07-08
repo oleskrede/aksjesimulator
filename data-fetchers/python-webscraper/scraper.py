@@ -7,6 +7,7 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 import time
 import json
 import logging
+import datetime
 
 from config import get_config
 
@@ -14,7 +15,7 @@ logging.basicConfig(filename='scraper.log', level=logging.INFO,
                     format='%(asctime)s %(message)s')
 
 def log(message):
-    print(message)
+    print(datetime.datetime.now(), message)
     logging.info(message)
 
 log('Loading config')
@@ -91,5 +92,6 @@ while True:
     json_data = scrape_for_exchange(ose_url, browser)
     log("Sending to kafka")
     send_to_topic(topic, json_data)
-    log('Iteration complete. Waiting 15 minutes before next iteration.')
-    time.sleep(60*15)
+
+    log('Iteration complete. Waiting 5 minutes before next iteration.')
+    time.sleep(60*5)

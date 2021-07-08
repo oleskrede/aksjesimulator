@@ -1,0 +1,31 @@
+{{> header}}
+
+<div>
+
+  <h2>Konto: {{account.name}}</h2>
+
+    <p>Balanse: {{account.balance}} NOK</p>
+
+    <table>
+      <caption>Beholdning</caption>
+      <tr>
+        <th>Navn</th>
+        <th>Antall</th>
+        <th>GAV <small>(NOK)</small></th>
+        <th>Verdi <small>(NOK)</small></th>
+      </tr>
+
+      {{#account.holdings}}
+        <tr>
+          <td><a href="/simple/stocks/{{stock.ticker}}">{{stock.name}}</a></td>
+          <td>{{amount}}</td>
+          <td>{{gav}}</td>
+          <td>{{stock.price}}</td>
+        </tr>
+      {{/account.holdings}}
+
+    </table>
+
+</div>
+
+{{> footer}}

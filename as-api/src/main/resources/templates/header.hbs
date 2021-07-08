@@ -1,26 +1,40 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/mobile.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
 </head>
 
 <body>
+  <div class="pageContent">
 
-  <div class="m-4">
-    <h1>Aksjesimulator</h1>
+    <div>
+      <h1>Aksjesimulator</h1>
 
-    <div class="flex space-between">
-      <div>
-        <a class="ml-1" href="/">Hjem</a>
-        <a class="ml-1" href="/accounts">Kontoer</a>
-        <a class="ml-1" href="/stocks">Aksjer</a>
-      </div>
-      <div>
-        <a class="ml-1" href="/profile">Profil</a>
-        <a class="ml-1" href="/log-in">Logg inn</a> 
-        <a class="ml-1" href="/log-out">Logg ut</a>
-      </div>
+      <nav>
+        <div>
+          {{#username}}
+          <a class="headerLink mr-1" href="/simple/accounts">Kontoer</a>
+          <a class="headerLink" href="/simple/stocks">Aksjer</a>
+          {{/username}}
+
+          <div class="headerLinksRight">
+            <a class="headerLink mr-1" href="/simple/faq">FAQ</a>
+            {{#username}}
+            <a class="headerLink mr-1" href="/simple/profile">Profil</a>
+            <a class="headerLink" href="/simple/logout">Logg ut</a>
+            {{/username}}
+            {{^username}}
+            <a class="headerLink" href="/simple/login">Logg inn</a>
+            {{/username}}
+
+          </div>
+        </div>
+      </nav>
+
     </div>
+    <hr />
 
-  </div>
-  <hr />
+    <div>

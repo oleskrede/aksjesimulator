@@ -1,5 +1,26 @@
 # aksjesimulator
 
+## TODOs
+
+
+- TODO pris/bank/konto templates ved ny konto
+- TODO hente inn reelle aksjekursar
+- TODO sette opp database
+- TODO lagre kursar til database
+- TODO vise aksjer
+- TODO handle aksjer
+- TODO endre konto
+- TODO slette konto
+- TODO profil endre passord
+- TODO profil reset passord via email
+- TODO vise endring over tid på kontovisning
+- TODO vise endring over tid på aksjevisning
+- TODO hente inn fleire aksjer
+- TODO errorHandling (use of !!)
+- TODO nedlasting av geckodriver i webscraper Dockerfile
+- TODO Jackson instead of Gson mapper in Ktor?
+ 
+
 ## Dokumentasjon
 
 #### Kjøre lokalt
@@ -33,6 +54,3 @@ Konsument:
 ```
 # kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test
 ```
-
-#### Arkitekturoversikt
-![Bilde oversikt](./docs/docs/overview.png)
