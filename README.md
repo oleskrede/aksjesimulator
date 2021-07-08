@@ -17,7 +17,6 @@
 - TODO vise endring over tid på aksjevisning
 - TODO hente inn fleire aksjer
 - TODO errorHandling (use of !!)
-- TODO nedlasting av geckodriver i webscraper Dockerfile
 - TODO Jackson instead of Gson mapper in Ktor?
  
 

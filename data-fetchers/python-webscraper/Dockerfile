@@ -1,10 +1,6 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.8
 
-# Install missing dependencies
-RUN apt-get update
-RUN apt-get install -y firefox-esr
-
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -13,12 +9,15 @@ ENV PYTHONUNBUFFERED=1
 
 ENV PROFILE=DOCKER
 
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-
 WORKDIR /app
 COPY . /app
+
+RUN apt-get update && \
+    apt-get install -y firefox-esr wget && \
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux64.tar.gz && \
+    tar -xzvf *.tar.gz && \
+    rm *.tar.gz && \
+    python -m pip install -r requirements.txt
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
