@@ -20,14 +20,15 @@ internal object Configuration {
         else -> throw IllegalArgumentException("Unknown PROFILE: $profile")
     }
     private val config = systemProperties() overriding
-            EnvironmentVariables() overriding
-            resourceProperties
+        EnvironmentVariables() overriding
+        resourceProperties
 
     fun initDB() {
         val hikariConfig = HikariConfig().apply {
             username = config[Key("db.user", stringType)]
             password = config[Key("db.password", stringType)]
-            jdbcUrl = "jdbc:postgresql://${config[Key("db.host", stringType)]}:${config[Key("db.port", stringType)]}/${config[Key("db.database", stringType)]}"
+            jdbcUrl = "jdbc:postgresql://${config[Key("db.host", stringType)]}:${config[Key("db.port", stringType)]
+            }/${config[Key("db.database", stringType)]}"
         }
 
         val dataSource = HikariDataSource(hikariConfig)
@@ -37,10 +38,4 @@ internal object Configuration {
 
         println("Database initialized")
     }
-
-//    private fun createTables() = transaction {
-//        SchemaUtils.create(
-//            Books
-//        )
-//    }
 }
